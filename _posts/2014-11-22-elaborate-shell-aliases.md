@@ -21,7 +21,7 @@ The continuous inflow of assignments at gSchool demands to be corralled into som
 │   └── zxcvtest
 {% endhighlight %}
 
-Such an organizational schema immediately presents us with the task of aliasing a command to `cd` into the current week's directory. That should be the one with the highest alphanumeric value in the `gschool` directory whose name matches the pattern "w"-digit-digit. So if we list all such folders in alphanumeric order and grab the last one, we'll have the one we want.
+Such an organizational schema immediately presents us with the task of aliasing a command to `cd` into the current week's directory. That should be the one that, among the subdirectories of `gschool` whose names match the pattern "w"-digit-digit, has the name with the highest alphanumeric value. So if we list all matching folders in alphanumeric order and grab the last one, we'll have the current week's.
 
 I implemented a solution along those lines first with Unix text processing utilities, and then, as an experiment, with Ruby.
 
@@ -42,7 +42,7 @@ alias gs="cd $HOME/gschool/$(ls $HOME/gschool | egrep 'w\d\d' | tail -1)"
 Finally, `tail -1` prints the last line of `egrep`'s output to stdout.  [`tail`](http://en.wikipedia.org/wiki/Tail_%28Unix%29) (partner-in-crime of [`head`](http://en.wikipedia.org/wiki/Head_%28Unix%29)) is a Unix utility that prints out the ends of files or streams. Because, as discussed above, the output of `ls` was in alphanumeric order, and `grep` preserved that order, this will be the directory whose name has the highest alphanumeric value. We've got the current week's directory!
 
 #### Or, less legibly than `tail -1`...
-Before I discovered the existence of `tail` in the course of writing this post, I had been using `sed -n '$p'` to print the last line of the stream from `grep`. For anyone interested, here's how that little snippet works.
+Before I discovered the existence of `tail` in the course of writing this post, I had been using `sed -n '$p'` to print the last line of the stream from `grep`. Here's how that little snippet works.
 
 Sed, a so-called "non-interactive text editor," reads text one line at a time, copying each line into "pattern space" to evaluate whether it matches the "address" provided to it and whether Sed should therefore execute the provided "command" on it. Sed's default behavior is next to print the line in pattern space to stdout before moving onto the next line. We don't want that, because we only want the last line of the stream to be printed out; the `-n` flag suppresses that default behavior. The `$` in `'$p'` is the Sed address, and refers to the last line of the file or stream; `p` is the command, and means print. `'$p'` must be quoted because besides its meaning in Sed, `$` is also a shell metacharacter, and if not quoted would be interpreted by the shell rather than by Sed.
 
@@ -65,7 +65,7 @@ Let's break that down. The `-e` flag simply tells Ruby to execute the quoted cod
 Step by step, then:
 
 1. `BEGIN{ary = []}` creates an empty array before the start of the iteration.
-2. `ary.push($_) if $_.match(/w\d\d/)` iterates over each line that was output by `ls`, adding it to the array when it matches the pattern "w"-digit-digit ().
+2. `ary.push($_) if $_.match(/w\d\d/)` iterates over each line that was output by `ls`, adding it to the array when it matches the pattern "w"-digit-digit.
 3. Finally, after the iteration completes, `END{puts ary[-1]}` prints the last item in the array to stdout.
 
 
