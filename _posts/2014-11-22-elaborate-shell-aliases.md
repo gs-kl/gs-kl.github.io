@@ -1,6 +1,5 @@
 ---
 layout: post
-publication: "published"
 title: "Setting up quick access to current class assignments in the shell"
 attentionconservationnotice: words on creating elaborate shell aliases with Unix text processing utilities (and with Ruby).
 ---
@@ -71,3 +70,8 @@ Step by step, then:
 
 ## Conclusion
 There may be a more elegant way to have done that in Ruby, but for now, looks like a win for Unix text processing utilities on both the concision and the legibility fronts.
+
+
+<div class="acknowledgements">
+Thanks to John Foley and Luis Manzo for reading a draft of this.
+</div>

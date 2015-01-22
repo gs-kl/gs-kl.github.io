@@ -1,13 +1,12 @@
 ---
 layout: post
-publication: published
 title: "Smart Tmux split creation from within Vim"
 ---
 While running Vim inside of Tmux, I often want to create a new Tmux split that opens in Vim's working directory or the directory of the current Vim file. Here's how I made keymappings for that in Vim.
 
 
 ## Background
-The initial `tmux new-session` or `tmux attach-session` command determines a **session working directory**, which if not specified with the `-c` flag defaults to the directory in which that command was run. All future windows and splits created in that session open in the session working directory unless a **start directory** is specified, again with the `-c` flag.
+The initial `tmux new-session` or `tmux attach-session` command determines a _session working directory_, which if not specified with the `-c` flag defaults to the directory in which that command was run. All future windows and splits created in that session open in the session working directory unless a _start directory_ is specified, again with the `-c` flag.
 
 So, for example, if I ran `tmux` in `/Users/kevin`, `cd`ed to `/Users/kevin/Documents`, and created a new horizontal split with `Prefix-"`, it would open in `/Users/kevin`. If I wanted to open the split in `/Users/kevin/Documents`, I could enter the shell command `tmux sp -c ${PWD}`. To always open horizontal splits in the current directory, I could create a shell alias for the aforementioned command, or I could add a line in my `.tmux.conf` rebinding `Prefix-"` to a custom command; [this Stack Overflow thread](http://unix.stackexchange.com/questions/12032/create-new-window-with-current-directory-in-tmux) provides ideas for that sort of thing. 
 

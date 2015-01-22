@@ -2,43 +2,68 @@
 layout: default
 ---
 
+    <div class="container content">
 <article class="post">
   <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date"> {{ page.date | date: "%B %-d, %Y" }}</time>
   <h1 class="post-title">{{ page.title }}</h1>
 
   <div class="content">
-    {% if page.attentionconservationnotice %}
-
-      <p class="attentionconservationnotice">
-        <span class="acn-title"><i class="fa fa-warning"></i> &nbsp;Attention conservation notice</span><br>
-        {{ page.content | number_of_words }} {{ page.attentionconservationnotice }}
-      </p>
-      </p>
-
-    {% endif %}
-
-
     {{ content }}
   </div>
-
 </article>
 
+    </div>
 
 
-<div class="pagination">
-  {% if page.previous.url %}
-    <a class="pagination-item older" href="{{page.previous.url}}">Previous post</a>
-  {% else %}
-    <span class="pagination-item older">Previous post</span>
-  {% endif %}
-{% if page.next.url %}
-  <a class="pagination-item newer" href="{{page.next.url}}">Next post</a>
-{% else %}
-  <span class="pagination-item newer">Next post</span>
-{% endif %}
 
-</div>
+    <div class="comments">
+      <div class="container content">
+      <h3>Comments</h3>
+      <p>Comments on, questions about, and corrections to this post are welcome by e-mail (<a href="http://www.google.com/recaptcha/mailhide/d?k=01by9UOvffhBb3uwh0_YK8DQ==&c=5kXwjKyqO_U1k83GSt6GiGS5sm8AdKMB0bZNjMqlX1o=">click to view address</a>) or on Twitter (<a href="https://twitter.com/litchk">@litchk</a>). Where relevant and with permission, they will be reproduced in an addendum to the post.</p>
+      </div>
 
+    </div>
+
+
+
+    <div class="pagination">
+      <div class="container content">
+        <div class="pagination-container">
+        {% if page.previous.url %}
+        <div class="direction">Previous post</div>
+        <div><a href="{{page.previous.url}}">{{page.previous.title}}</a></div>
+
+        {% endif %}
+        </div>
+
+
+        <div class="pagination-container">
+        {% if page.next.url %}
+        <div class="next-post">
+          <div class="direction">Next post</div>
+          <div><a href="{{page.next.url}}">{{page.next.title}}</a></div>
+        {% endif %}
+        </div>
+
+        </div>
+    </div>
+
+
+<!-- <div class="pagination"> -->
+<!--     <div class="container content"> -->
+<!--   {% if page.previous.url %} -->
+<!--     <a class="pagination-item older" href="{{page.previous.url}}">Previous post</a> -->
+<!--   {% else %} -->
+<!--     <span class="pagination-item older">Previous post</span> -->
+<!--   {% endif %} -->
+<!-- {% if page.next.url %} -->
+<!--   <a class="pagination-item newer" href="{{page.next.url}}">Next post</a> -->
+<!-- {% else %} -->
+<!--   <span class="pagination-item newer">Next post</span> -->
+<!-- {% endif %} -->
+
+<!-- </div> -->
+<!--     </div> -->
 
 
 <!--
